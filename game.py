@@ -30,24 +30,28 @@ class GameWindow():
                 self.team_one += 1
             else:
                 self.team_two += 1
-            switch()
+            
+            shuffle(self.bowl)
+            if len(self.bowl) == 0:
+                finish_round()
+            else:
+                self.current = self.bowl.pop(self.card)
+                display()
 
         def switch():
             if self.team_turn == 1:
                 self.team_turn = 2
             else:
                 self.team_turn = 1
-            if len(self.bowl) == 0:
-                finish_round()
-                exit
-            else:
-                self.current = self.bowl.pop(self.card)
-                display()
+
+            shuffle(self.bowl)
+
+            display()
 
         def skip():
             self.bowl.append(self.current)
             self.current = self.bowl.pop(self.card)
-            display()
+            switch()
 
         def display():
             self.round_label.destroy()
@@ -86,13 +90,13 @@ class GameWindow():
             switch_player.pack(side=BOTTOM)
 
         def finish_round():
+            display()
             self.round += 1
             if self.round == 4:
                 self.done_label.pack()
                 exit
             self.bowl = inputs.copy()
             shuffle(self.bowl)
-            display()
 
         self.round_label = Label(self.win, text="Round " + str(self.round))
         self.description_label = Label(self.win, text="Taboo. Use words to describe the word/phrase. No acting or gestures!")
