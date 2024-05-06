@@ -2,6 +2,7 @@ from tkinter import Label
 from tkinter import Entry
 from tkinter import Button
 from tkinter import Tk
+from game import GameWindow
 
 
 class EntryWindow:
@@ -25,16 +26,24 @@ class EntryWindow:
 
             input_entry.delete(0, 'end')
 
+        def done():
+            game = GameWindow(all_inputs)
+            game.start()
+            win.destroy()
+
         input_label = Label(win, text="Input words or phrases here",
                             font=('calibre', 10, 'bold'))
         input_entry = Entry(win, font=('calibre', 10))
         display_label = Label(win, text="Here are your words/phrases:",
                               font=('calibre', 10, 'bold'))
         submit_button = Button(win, text="Submit", command=submit)
+        done_button = Button(win, text="Done inputting words and phrases",
+                             command=done)
 
         input_label.pack()
         input_entry.pack()
         submit_button.pack()
+        done_button.pack()
 
     def start(self):
-        self.win.mainloop
+        self.win.mainloop()
