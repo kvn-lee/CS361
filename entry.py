@@ -63,6 +63,10 @@ class EntryWindow:
             no_button = Button(self.popup, text="No", command=self.popup.destroy)
             no_button.pack(padx=50, pady=50, side='right')
             self.popup.mainloop()    
+        
+        def quitAll():
+            self.popup.destroy()
+            win.destroy()
 
         input1_label = Label(win, text="Step 1: Input the words or phrases that you want to play with here:", font=('calibre', 10, 'bold'))
         input2_label = Label(win, text="You can input them in one at a time OR input them divided by a '/' (ex: apple/carrot/potato)", font=('calibre', 10, 'bold'))
