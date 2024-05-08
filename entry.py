@@ -54,6 +54,16 @@ class EntryWindow:
             win.destroy()
             team.start()
 
+        def exitGame():
+            self.popup = Tk()
+            label = Label(self.popup, text="Are you sure you want to quit? You can not return to the game.")
+            label.pack()
+            yes_button = Button(self.popup, text="Yes", command=quitAll)
+            yes_button.pack(padx=50, pady=50, side='left')
+            no_button = Button(self.popup, text="No", command=self.popup.destroy)
+            no_button.pack(padx=50, pady=50, side='right')
+            self.popup.mainloop()    
+
         input1_label = Label(win, text="Step 1: Input the words or phrases that you want to play with here:", font=('calibre', 10, 'bold'))
         input2_label = Label(win, text="You can input them in one at a time OR input them divided by a '/' (ex: apple/carrot/potato)", font=('calibre', 10, 'bold'))
         input_entry = Entry(win, font=('calibre', 10))
@@ -61,6 +71,7 @@ class EntryWindow:
         submit_button = Button(win, text="Submit", command=submit)
         clear_button = Button(win, text="Clear the list of inputs", command=clear)
         done_button = Button(win, text="Done inputting words and phrases", command=done)
+        exit_button = Button(win, text="Exit the game", font=('bold'), command=exitGame)
 
         input1_label.pack()
         input2_label.pack()
@@ -68,6 +79,7 @@ class EntryWindow:
         submit_button.pack()
         done_button.pack()
         clear_button.pack()
+        exit_button.pack()
 
     def start(self):
         self.win.mainloop()
