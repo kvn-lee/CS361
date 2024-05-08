@@ -51,7 +51,7 @@ class GameWindow():
         def skip():
             self.bowl.append(self.current)
             self.current = self.bowl.pop(self.card)
-            switch()
+            display()
 
         def display():
             self.round_label.destroy()

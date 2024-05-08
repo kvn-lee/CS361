@@ -17,8 +17,7 @@ class EntryWindow:
         def submit():
             input = input_entry.get()
             all_inputs.append(input)
-            all_labels.append(Label(win, text=input, font=('calibre',
-                              10)))
+            all_labels.append(Label(win, text=input, font=('calibre', 10)))
 
             display_label.pack()
             for value in all_labels:
@@ -31,14 +30,11 @@ class EntryWindow:
             game.start()
             win.destroy()
 
-        input_label = Label(win, text="Input words or phrases here",
-                            font=('calibre', 10, 'bold'))
+        input_label = Label(win, text="Input words or phrases here", font=('calibre', 10, 'bold'))
         input_entry = Entry(win, font=('calibre', 10))
-        display_label = Label(win, text="Here are your words/phrases:",
-                              font=('calibre', 10, 'bold'))
+        display_label = Label(win, text="Here are your words/phrases:", font=('calibre', 10, 'bold'))
         submit_button = Button(win, text="Submit", command=submit)
-        done_button = Button(win, text="Done inputting words and phrases",
-                             command=done)
+        done_button = Button(win, text="Done inputting words and phrases", command=done)
 
         input_label.pack()
         input_entry.pack()
