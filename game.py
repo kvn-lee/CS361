@@ -2,10 +2,6 @@ from random import shuffle
 from tkinter import Tk
 from tkinter import Label
 from tkinter import Button
-from tkinter import LEFT
-from tkinter import RIGHT
-from tkinter import BOTTOM
-from tkinter import BOTH
 
 
 class GameWindow():
@@ -30,13 +26,8 @@ class GameWindow():
                 self.team_one += 1
             else:
                 self.team_two += 1
-            
-            shuffle(self.bowl)
-            if len(self.bowl) == 0:
-                finish_round()
-            else:
-                self.current = self.bowl.pop(self.card)
-                display()
+
+            display()
 
         def switch():
             if self.team_turn == 1:
@@ -44,13 +35,11 @@ class GameWindow():
             else:
                 self.team_turn = 1
 
-            shuffle(self.bowl)
-
-            display()
+            skip()
 
         def skip():
+            print(self.bowl)
             self.bowl.append(self.current)
-            self.current = self.bowl.pop(self.card)
             display()
 
         def display():
@@ -60,6 +49,25 @@ class GameWindow():
             self.description_label.destroy()
             self.team_one_point_label.destroy()
             self.team_two_point_label.destroy()
+
+            if len(self.bowl) == 0:
+                self.round += 1
+                if self.round == 4:
+                    self.done_label.pack()
+                    self.round_label.destroy()
+                    self.team_label.destroy()
+                    self.game_label.destroy()
+                    self.description_label.destroy()
+                    self.team_one_point_label.destroy()
+                    self.team_two_point_label.destroy()
+                    skip_button.destroy()
+                    score_button.destroy()
+                    switch_player.destroy()
+                    return
+                self.bowl = inputs.copy()
+            
+            shuffle(self.bowl)
+            self.current = self.bowl.pop(self.card)
 
             self.team_label = Label(self.win, text="It is Team " + str(self.team_turn) + "'s turn!")
             self.game_label = Label(self.win, text="Your word is: " + self.current)
@@ -81,22 +89,28 @@ class GameWindow():
             self.team_label.pack()
             self.game_label.pack()
             self.description_label.pack()
-            self.team_one_point_label.pack(side=LEFT, fill=BOTH)
-            self.team_two_point_label.pack(side=RIGHT, fill=BOTH)
+            self.team_one_point_label.pack(side='left')
+            self.team_two_point_label.pack(side='right')
 
-            score_button.pack(side=RIGHT, fill=BOTH)
-            skip_button.pack(side=LEFT, fill=BOTH)
+            skip_button.pack(side='left')
+            score_button.pack(side='right')
 
-            switch_player.pack(side=BOTTOM)
+            switch_player.pack(side='bottom')
+            exit_button.pack(side='bottom')
+        
+        def exitGame():
+            self.popup = Tk()
+            label = Label(self.popup, text="Are you sure you want to quit? You can not return to the game.")
+            label.pack()
+            yes_button = Button(self.popup, text="Yes", command=quitAll)
+            yes_button.pack(padx=50, pady=50, side='left')
+            no_button = Button(self.popup, text="No", command=self.popup.destroy)
+            no_button.pack(padx=50, pady=50, side='right')
+            self.popup.mainloop()            
 
-        def finish_round():
-            display()
-            self.round += 1
-            if self.round == 4:
-                self.done_label.pack()
-                exit
-            self.bowl = inputs.copy()
-            shuffle(self.bowl)
+        def quitAll():
+            self.popup.destroy()
+            self.win.destroy()
 
         self.round_label = Label(self.win, text="Round " + str(self.round))
         self.description_label = Label(self.win, text="Taboo. Use words to describe the word/phrase. No acting or gestures!")
@@ -110,18 +124,20 @@ class GameWindow():
         score_button = Button(self.win, text="Score if your team guesses correctly!", command=score)
         skip_button = Button(self.win, text="Pass if your team is stuck...", command=skip)
         switch_player = Button(self.win, text="Switch to the next team", command=switch)
+        exit_button = Button(self.win, text="Exit the game", font=('bold'), command=exitGame)
 
         self.round_label.pack()
         self.team_label.pack()
         self.game_label.pack()
         self.description_label.pack()
-        self.team_one_point_label.pack(side=LEFT, fill=BOTH)
-        self.team_two_point_label.pack(side=RIGHT, fill=BOTH)
+        self.team_one_point_label.pack(side='left')
+        self.team_two_point_label.pack(side='right')
 
-        score_button.pack(side=RIGHT, fill=BOTH)
-        skip_button.pack(side=LEFT, fill=BOTH)
+        skip_button.pack(side='left')
+        score_button.pack(side='right')
 
-        switch_player.pack(side=BOTTOM)
+        switch_player.pack(side='bottom')
+        exit_button.pack(side='bottom')
 
     def start(self):
         self.win.mainloop()
