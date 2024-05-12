@@ -5,7 +5,7 @@ from tkinter import Button
 
 
 class GameWindow():
-    def __init__(self, inputs):
+    def __init__(self, inputs,team_one,team_two):
         self.win = Tk()
         self.win.title("Fishbowl Game")
         self.win.geometry("1500x500")
@@ -123,7 +123,7 @@ class GameWindow():
         score_button = Button(self.win, text="Score if your team guesses correctly!", command=score)
         skip_button = Button(self.win, text="Pass if your team is stuck...", command=skip)
         switch_player = Button(self.win, text="Switch to the next team", command=switch)
-        exit_button = Button(self.win, text="Exit the game", font=('bold'), command=exitGame)
+        exit_button = Button(self.win, text="Exit the game", font=('calibre',10,'bold'), command=exitGame)
 
         self.round_label.pack()
         self.team_label.pack()
