@@ -38,7 +38,6 @@ class GameWindow():
             skip()
 
         def skip():
-            print(self.bowl)
             self.bowl.append(self.current)
             display()
 
