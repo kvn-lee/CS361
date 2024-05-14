@@ -44,6 +44,8 @@ class EntryWindow:
             for value in self.all_labels:
                 value.destroy()
 
+            self.popup.destroy()
+
             self.all_inputs = []
             self.all_labels = []
 
