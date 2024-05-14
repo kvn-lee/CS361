@@ -18,6 +18,9 @@ class GameWindow():
         self.card = 0
         self.bowl = inputs.copy()
         self.current = self.bowl.pop(self.card)
+        self.team_one_player = 0
+        self.team_two_player = 0
+        self.current_player = team_one[0]
 
         shuffle(self.bowl)
 
@@ -32,8 +35,16 @@ class GameWindow():
         def switch():
             if self.team_turn == 1:
                 self.team_turn = 2
+                self.current_player = team_two[self.team_two_player]
+                self.team_two_player += 1
+                if self.team_two_player == 5:
+                    self.team_two_player = 0
             else:
                 self.team_turn = 1
+                self.current_player = team_one[self.team_one_player]
+                self.team_one_player += 1
+                if self.team_one_player == 5:
+                    self.team_one_player = 0
 
             skip()
 
@@ -68,7 +79,7 @@ class GameWindow():
             shuffle(self.bowl)
             self.current = self.bowl.pop(self.card)
 
-            self.team_label = Label(self.win, text="It is Team " + str(self.team_turn) + "'s turn!")
+            self.team_label = Label(self.win, text="It is " + self.current_player + "'s turn from Team " + str(self.team_turn) + "!")
             self.game_label = Label(self.win, text="Your word is: " + self.current)
             self.round_label = Label(self.win, text="Round " + str(self.round))
             self.team_one_point_label = Label(self.win, text="Team 1 Points: " + str(self.team_one))
@@ -115,7 +126,8 @@ class GameWindow():
         self.description_label = Label(self.win, text="Taboo. Use words to describe the word/phrase. No acting or gestures!")
         self.game_label = Label(self.win, text="Your word is: " + self.current)
         self.done_label = Label(self.win, text="Game over!")
-        self.team_label = Label(self.win, text="It is Team " + str(self.team_turn) + "'s turn!")
+        self.team_label = Label(self.win, text="It is " + self.current_player + "'s turn from Team " + str(self.team_turn) + "!")
+        self.team_one_player += 1
 
         self.team_one_point_label = Label(self.win, text="Team 1 Points: " + str(self.team_one))
         self.team_two_point_label = Label(self.win, text="Team 2 Points: " + str(self.team_two))
