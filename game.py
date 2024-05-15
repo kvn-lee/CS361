@@ -2,6 +2,7 @@ from random import shuffle
 from tkinter import Tk
 from tkinter import Label
 from tkinter import Button
+import zmq
 
 
 class GameWindow():
@@ -21,6 +22,10 @@ class GameWindow():
         self.team_one_player = 0
         self.team_two_player = 0
         self.current_player = team_one[0]
+
+        context = zmq.Context()
+        socket = context.socket(zmq.REQ)
+        socket.connect("tcp://localhost:5000")
 
         shuffle(self.bowl)
 
@@ -61,6 +66,9 @@ class GameWindow():
             self.team_two_point_label.destroy()
 
             if len(self.bowl) == 0:
+                socket.send_json([self.team_one, self.team_two])
+                response = socket.recv_string()
+                print(f"Received response: {response}")
                 self.round += 1
                 if self.round == 4:
                     self.done_label.pack()
