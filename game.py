@@ -40,15 +40,19 @@ class GameWindow():
         def switch():
             if self.team_turn == 1:
                 self.team_turn = 2
+                print("team 2:")
+                print(self.team_two_player)
                 self.current_player = team_two[self.team_two_player]
                 self.team_two_player += 1
-                if self.team_two_player == 5:
+                if self.team_two_player >= len(team_two):
                     self.team_two_player = 0
             else:
                 self.team_turn = 1
+                print("team 1:")
+                print(self.team_one_player)
                 self.current_player = team_one[self.team_one_player]
                 self.team_one_player += 1
-                if self.team_one_player == 5:
+                if self.team_one_player >= len(team_one):
                     self.team_one_player = 0
 
             skip()
@@ -62,8 +66,6 @@ class GameWindow():
             self.team_label.destroy()
             self.game_label.destroy()
             self.description_label.destroy()
-            self.team_one_point_label.destroy()
-            self.team_two_point_label.destroy()
 
             if len(self.bowl) == 0:
                 socket.send_json([self.team_one, self.team_two])
@@ -90,8 +92,6 @@ class GameWindow():
             self.team_label = Label(self.win, text="It is " + self.current_player + "'s turn from Team " + str(self.team_turn) + "!")
             self.game_label = Label(self.win, text="Your word is: " + self.current)
             self.round_label = Label(self.win, text="Round " + str(self.round))
-            self.team_one_point_label = Label(self.win, text="Team 1 Points: " + str(self.team_one))
-            self.team_two_point_label = Label(self.win, text="Team 2 Points: " + str(self.team_two))
 
             match self.round:
                 case 1:
@@ -107,8 +107,6 @@ class GameWindow():
             self.team_label.pack()
             self.game_label.pack()
             self.description_label.pack()
-            self.team_one_point_label.pack(side='left')
-            self.team_two_point_label.pack(side='right')
 
             skip_button.pack(side='left')
             score_button.pack(side='right')
@@ -135,10 +133,6 @@ class GameWindow():
         self.game_label = Label(self.win, text="Your word is: " + self.current)
         self.done_label = Label(self.win, text="Game over!")
         self.team_label = Label(self.win, text="It is " + self.current_player + "'s turn from Team " + str(self.team_turn) + "!")
-        self.team_one_player += 1
-
-        self.team_one_point_label = Label(self.win, text="Team 1 Points: " + str(self.team_one))
-        self.team_two_point_label = Label(self.win, text="Team 2 Points: " + str(self.team_two))
 
         score_button = Button(self.win, text="Score if your team guesses correctly!", command=score)
         skip_button = Button(self.win, text="Pass if your team is stuck...", command=skip)
@@ -149,8 +143,6 @@ class GameWindow():
         self.team_label.pack()
         self.game_label.pack()
         self.description_label.pack()
-        self.team_one_point_label.pack(side='left')
-        self.team_two_point_label.pack(side='right')
 
         skip_button.pack(side='left')
         score_button.pack(side='right')
