@@ -40,16 +40,12 @@ class GameWindow():
         def switch():
             if self.team_turn == 1:
                 self.team_turn = 2
-                print("team 2:")
-                print(self.team_two_player)
                 self.current_player = team_two[self.team_two_player]
                 self.team_two_player += 1
                 if self.team_two_player >= len(team_two):
                     self.team_two_player = 0
             else:
                 self.team_turn = 1
-                print("team 1:")
-                print(self.team_one_player)
                 self.current_player = team_one[self.team_one_player]
                 self.team_one_player += 1
                 if self.team_one_player >= len(team_one):
