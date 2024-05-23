@@ -141,24 +141,24 @@ class TeamWindow:
         def load_team():
             f = open("./states/players.txt", "r")
 
-            if os.path.getsize("./states/players.txt") > 0:
-                for line in f:
-                    if line.find("1") > 0:
-                        self.team_one.append(line[7:])
-                        self.team_one_inputs.append(Label(self.win, text=line[7:], font=('calibre', 10)))
-                    if line.find("2") > 0:
-                        self.team_two.append(line[7:])
-                        self.team_two_inputs.append(Label(self.win, text=line[7:], font=('calibre', 10)))
-                
-                self.team_one_grid_index = 9
-                for value in self.team_one_inputs:
-                    value.grid(row=self.team_one_grid_index,column=0,columnspan=1)
-                    self.team_one_grid_index += 1
+            for line in f:
+                if line.find("1") > 0:
+                    self.team_one.append(line[7:])
+                    self.team_one_inputs.append(Label(self.win, text=line[7:], font=('calibre', 10)))
+                if line.find("2") > 0:
+                    self.team_two.append(line[7:])
+                    self.team_two_inputs.append(Label(self.win, text=line[7:], font=('calibre', 10)))
+            
+            self.team_one_grid_index = 9
+            for value in self.team_one_inputs:
+                value.grid(row=self.team_one_grid_index,column=0,columnspan=1)
+                self.team_one_grid_index += 1
 
-                self.team_two_grid_index = 9
-                for value in self.team_two_inputs:
-                    value.grid(row=self.team_two_grid_index,column=2,columnspan=1)
-                    self.team_two_grid_index += 1
+            self.team_two_grid_index = 9
+            for value in self.team_two_inputs:
+                value.grid(row=self.team_two_grid_index,column=2,columnspan=1)
+                self.team_two_grid_index += 1
+
             f.close()
 
         title = Label(self.win, text="Step 2: Let's make teams!")
