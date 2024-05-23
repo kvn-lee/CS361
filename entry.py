@@ -67,8 +67,31 @@ class EntryWindow:
             self.popup.mainloop()    
         
         def quitAll():
+            save_inputs()
             self.popup.destroy()
             win.destroy()
+
+        def save_inputs():
+            f = open("./states/inputs.txt", "w")
+
+            for input in self.all_inputs:
+                f.write(input)
+
+            f.close()
+
+        def load_inputs():
+            f = open("./states/inputs.txt", "r")
+
+            for line in f:
+                self.all_inputs.append(line)
+                self.all_labels.append(Label(win, text=line, font=('calibre', 10)))
+
+            display_label.pack()
+
+            for value in self.all_labels:
+                value.pack()
+
+            f.close()
 
         input1_label = Label(win, text="Step 1: Input the words or phrases that you want to play with here:", font=('calibre', 10, 'bold'))
         input2_label = Label(win, text="You can input them in one at a time OR input them divided by a '/' (ex: apple/carrot/potato)", font=('calibre', 10, 'bold'))
@@ -76,12 +99,14 @@ class EntryWindow:
         display_label = Label(win, text="Here are your words/phrases:", font=('calibre', 10, 'bold'))
         submit_button = Button(win, text="Submit", command=submit)
         clear_button = Button(win, text="Clear the list of inputs", command=clear)
+        load_button = Button(win, text="Load words/phrases from a previous game", command=load_inputs)
         done_button = Button(win, text="Done inputting words and phrases", command=done)
         exit_button = Button(win, text="Exit the game", font=('bold'), command=exitGame)
 
         input1_label.pack()
         input2_label.pack()
         input_entry.pack()
+        load_button.pack()
         submit_button.pack()
         done_button.pack()
         clear_button.pack()
