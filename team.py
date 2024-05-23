@@ -34,6 +34,7 @@ class TeamWindow:
             self.win.destroy()
 
         def exit_window():
+            save_team()
             self.win.destroy()
             game = GameWindow(inputs,self.team_one,self.team_two)
             game.start()
@@ -180,7 +181,6 @@ class TeamWindow:
 
         display_team2 = Label(self.win, text="Team 2 players:", font=('calibre', 10, 'bold'))
 
-        save_team_button = Button(self.win, text="Save players for future rounds", command=save_team)
         load_team_button = Button(self.win, text="Load players from a saved round", command=load_team)
         confirmation = Label(self.win, text="Are you ready to start?")
 
@@ -202,7 +202,6 @@ class TeamWindow:
         team2_clear.grid(row=8,column=2,columnspan=1)
 
         load_team_button.grid(row=18, column=1)
-        save_team_button.grid(row=19, column=1)
         confirmation.grid(row=20,column=1)
         yes_button = Button(self.win, text="Yes", command=exit_window)
         yes_button.grid(row=21,column=1)
