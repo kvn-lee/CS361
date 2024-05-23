@@ -3,6 +3,7 @@ from tkinter import Label
 from tkinter import Tk
 from tkinter import Entry
 from game import GameWindow
+import os
 
 
 class TeamWindow:
@@ -126,6 +127,40 @@ class TeamWindow:
 
             self.popup.destroy()
 
+        def save_team():
+            f = open("./states/players.txt", "w")
+
+            for player in self.team_one:
+                f.write("Team 1:" + player + "\n")
+
+            for player in self.team_two:
+                f.write("Team 2:" + player + "\n")
+
+            f.close()
+
+        def load_team():
+            f = open("./states/players.txt", "r")
+
+            if os.path.getsize("./states/players.txt") > 0:
+                for line in f:
+                    if line.find("1") > 0:
+                        self.team_one.append(line[7:])
+                        self.team_one_inputs.append(Label(self.win, text=line[7:], font=('calibre', 10)))
+                    if line.find("2") > 0:
+                        self.team_two.append(line[7:])
+                        self.team_two_inputs.append(Label(self.win, text=line[7:], font=('calibre', 10)))
+                
+                self.team_one_grid_index = 9
+                for value in self.team_one_inputs:
+                    value.grid(row=self.team_one_grid_index,column=0,columnspan=1)
+                    self.team_one_grid_index += 1
+
+                self.team_two_grid_index = 9
+                for value in self.team_two_inputs:
+                    value.grid(row=self.team_two_grid_index,column=2,columnspan=1)
+                    self.team_two_grid_index += 1
+            f.close()
+
         title = Label(self.win, text="Step 2: Let's make teams!")
         instruction = Label(self.win, text="Once in teams, you will alternate between players of each team!")
         team_label_entry = Label(self.win, text="You can input players' names one at a time OR input them divided by a '/' (ex: Jeremy/Alice/Fiona)", font=('calibre', 10, 'bold'))
@@ -145,6 +180,8 @@ class TeamWindow:
 
         display_team2 = Label(self.win, text="Team 2 players:", font=('calibre', 10, 'bold'))
 
+        save_team_button = Button(self.win, text="Save players for future rounds", command=save_team)
+        load_team_button = Button(self.win, text="Load players from a saved round", command=load_team)
         confirmation = Label(self.win, text="Are you ready to start?")
 
         title.grid(row=0,column=1)
@@ -164,6 +201,8 @@ class TeamWindow:
         display_team2.grid(row=7,column=2,columnspan=1)
         team2_clear.grid(row=8,column=2,columnspan=1)
 
+        load_team_button.grid(row=18, column=1)
+        save_team_button.grid(row=19, column=1)
         confirmation.grid(row=20,column=1)
         yes_button = Button(self.win, text="Yes", command=exit_window)
         yes_button.grid(row=21,column=1)

@@ -13,7 +13,7 @@ class EntryWindow:
         self.all_inputs = []
         self.all_labels = []
 
-        def submit():
+        def submit(): 
             input = input_entry.get()
             multiple_inputs = input.split("/")
             if len(multiple_inputs) > 0:
