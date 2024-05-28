@@ -2,6 +2,7 @@ from random import shuffle
 from tkinter import Tk
 from tkinter import Label
 from tkinter import Button
+from tkinter import Entry
 import zmq
 
 
@@ -70,6 +71,10 @@ class GameWindow():
                 self.round += 1
                 if self.round == 4:
                     self.done_label.pack()
+                    self.feedback_label.pack()
+                    entry = Entry(self.win, font=('calibre',10))
+                    entry.pack()
+
                     self.round_label.destroy()
                     self.team_label.destroy()
                     self.game_label.destroy()
@@ -129,6 +134,7 @@ class GameWindow():
         self.game_label = Label(self.win, text="Your word is: " + self.current)
         self.done_label = Label(self.win, text="Game over!")
         self.team_label = Label(self.win, text="It is " + self.current_player + "'s turn from Team " + str(self.team_turn) + "!")
+        self.feedback_label = Label(self.win, text="Submit feedback on the game!")
 
         score_button = Button(self.win, text="Score if your team guesses correctly!", command=score)
         skip_button = Button(self.win, text="Pass if your team is stuck...", command=skip)
