@@ -52,6 +52,7 @@ class EntryWindow:
             display_label.pack()
 
         def done():
+            save_inputs()
             team = TeamWindow(self.all_inputs)
             win.destroy()
             team.start()
@@ -67,7 +68,6 @@ class EntryWindow:
             self.popup.mainloop()    
         
         def quitAll():
-            save_inputs()
             self.popup.destroy()
             win.destroy()
 
