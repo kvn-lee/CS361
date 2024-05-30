@@ -144,11 +144,11 @@ class TeamWindow:
 
             for line in f:
                 if line.find("1") > 0:
-                    self.team_one.append(line[7:])
-                    self.team_one_inputs.append(Label(self.win, text=line[7:], font=('calibre', 10)))
+                    self.team_one.append(line[7:].strip())
+                    self.team_one_inputs.append(Label(self.win, text=line[7:].strip(), font=('calibre', 10)))
                 if line.find("2") > 0:
-                    self.team_two.append(line[7:])
-                    self.team_two_inputs.append(Label(self.win, text=line[7:], font=('calibre', 10)))
+                    self.team_two.append(line[7:].strip())
+                    self.team_two_inputs.append(Label(self.win, text=line[7:].strip(), font=('calibre', 10)))
             
             self.team_one_grid_index = 9
             for value in self.team_one_inputs:

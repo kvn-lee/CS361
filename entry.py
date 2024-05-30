@@ -75,7 +75,7 @@ class EntryWindow:
             f = open("./states/inputs.txt", "w")
 
             for input in self.all_inputs:
-                f.write(input)
+                f.write(input + "\n")
 
             f.close()
 
@@ -83,7 +83,7 @@ class EntryWindow:
             f = open("./states/inputs.txt", "r")
 
             for line in f:
-                self.all_inputs.append(line)
+                self.all_inputs.append(line.strip())
                 self.all_labels.append(Label(win, text=line, font=('calibre', 10)))
 
             display_label.pack()

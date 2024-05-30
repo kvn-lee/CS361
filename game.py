@@ -13,7 +13,6 @@ class GameWindow():
         self.win.geometry("1500x500")
 
         self.round = 1
-        round_scores = {}
         self.team_turn = 1
         self.team_one = 0
         self.team_two = 0
@@ -119,10 +118,9 @@ class GameWindow():
         def submitFeedback():
             feedback = self.entry.get()
             f = open("./states/feedback.txt", "w")
-
             f.write(feedback)
-
             f.close()
+            self.win.destroy()
 
         def exitGame():
             self.popup = Tk()
