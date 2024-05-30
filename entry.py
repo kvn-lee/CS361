@@ -108,8 +108,8 @@ class EntryWindow:
         input_entry.pack()
         load_button.pack()
         submit_button.pack()
-        done_button.pack()
         clear_button.pack()
+        done_button.pack()
         exit_button.pack()
 
     def start(self):
