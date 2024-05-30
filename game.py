@@ -72,15 +72,16 @@ class GameWindow():
                 if self.round == 4:
                     self.done_label.pack()
                     self.feedback_label.pack()
-                    entry = Entry(self.win, font=('calibre',10))
-                    entry.pack()
+                    self.entry = Entry(self.win, font=('calibre',10))
+                    self.entry.pack()
+
+                    self.entryButton = Button(self.win, text="Submit", command=submitFeedback)
+                    self.entryButton.pack()
 
                     self.round_label.destroy()
                     self.team_label.destroy()
                     self.game_label.destroy()
                     self.description_label.destroy()
-                    self.team_one_point_label.destroy()
-                    self.team_two_point_label.destroy()
                     skip_button.destroy()
                     score_button.destroy()
                     switch_player.destroy()
@@ -115,6 +116,14 @@ class GameWindow():
             switch_player.pack(side='bottom')
             exit_button.pack(side='bottom')
         
+        def submitFeedback():
+            feedback = self.entry.get()
+            f = open("./states/feedback.txt", "w")
+
+            f.write(feedback)
+
+            f.close()
+
         def exitGame():
             self.popup = Tk()
             label = Label(self.popup, text="Are you sure you want to quit? You can not return to the game.")

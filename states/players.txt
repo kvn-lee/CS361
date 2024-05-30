@@ -1,4 +1,6 @@
-Team 1:asdf
-
-Team 2:test
-
+Team 1:Jeremy
+Team 1:Alice
+Team 1:Fiona
+Team 2:Kevin
+Team 2:Ellen
+Team 2:Irene
