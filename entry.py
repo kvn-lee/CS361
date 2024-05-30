@@ -84,7 +84,7 @@ class EntryWindow:
 
             for line in f:
                 self.all_inputs.append(line.strip())
-                self.all_labels.append(Label(win, text=line, font=('calibre', 10)))
+                self.all_labels.append(Label(win, text=line.strip(), font=('calibre', 10)))
 
             display_label.pack()
 
